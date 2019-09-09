@@ -26,5 +26,16 @@ func main() {
 		c.JSON(200, gin.H{"message": fmt.Sprintf("Hello, %s %s!", firstName, lastName)})
 	})
 
+	r.POST("/form", func(c *gin.Context) {
+		message := c.PostForm("message")
+		name := c.DefaultPostForm("name", "Anon")
+
+		c.JSON(200, gin.H{
+			"status":  "sent",
+			"message": message,
+			"name":    name,
+		})
+	})
+
 	r.Run()
 }
