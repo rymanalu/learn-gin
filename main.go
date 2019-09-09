@@ -19,5 +19,12 @@ func main() {
 		c.JSON(200, gin.H{"message": fmt.Sprintf("Hello, %s!", name)})
 	})
 
+	r.GET("/query", func(c *gin.Context) {
+		firstName := c.DefaultQuery("firstname", "John")
+		lastName := c.DefaultQuery("lastname", "Lennon")
+
+		c.JSON(200, gin.H{"message": fmt.Sprintf("Hello, %s %s!", firstName, lastName)})
+	})
+
 	r.Run()
 }
